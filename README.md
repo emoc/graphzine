@@ -21,3 +21,24 @@ Une table des matières spécifique est créée pour l'exemplaire en cours. Elle
 Le fichier pdf est assemblé à partir du chemin de fer. Pour cela les images sont placées les unes à côté des autres et orientées dans le sens adéquat...
 
 ![Préparation du fichier](./assets/montage.png?00)
+
+## Préparer les pages
+
+Chaque image est conçue à partir d'un squelette de code fourni (zine_base). Le sketch processing produit une image dans une définition de 1240 x 874 (format A5 paysage 150 dpi). Une marge blanche de 4 mm est appliquée sur toutes les images dans le script zine_base.
+
+## Préparation d'un exemplaire
+
+## Procédure pour la création d'un exemplaire
+
+Créer les scripts, leur donner des droits d'exécution
+```bash
+  chmod +x ./creation_exemplaire.php
+  chmod +x ./commandes_conversion.sh  
+```
+Lancer le script php
+```bash
+  php ./creation_exemplaire.php
+```
+## Ressources
+
+[Traitement par lot avec processing en ligne de commande](http://lesporteslogiques.net/wiki/ressource/code/processing/traitement_par_lot)  
