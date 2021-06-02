@@ -22,15 +22,21 @@ Le fichier pdf est assemblé à partir du chemin de fer. Pour cela les images so
 
 ![Préparation du fichier](./assets/montage.png?00)
 
-## Préparer les pages
+## Préparation des pages
 
-Chaque image est conçue à partir d'un squelette de code fourni (zine_base). Le sketch processing produit une image dans une définition de 1240 x 874 (format A5 paysage 150 dpi). Une marge blanche de 4 mm est appliquée sur toutes les images dans le script zine_base.
+Chaque image est conçue à partir d'un squelette de code fourni (*zine_base*). Le sketch processing produit une image dans une définition de 1240 x 874 (format A5 paysage 150 dpi). Une marge blanche de 4 mm est appliquée sur toutes les images dans le script *zine_base*.
 
 ## Préparation d'un exemplaire
 
-## Procédure pour la création d'un exemplaire
+### Étapes
+  * création des images par script
+  * création des couvertures par un script adapté
+  * assemblage des images par script, jusqu'au fichier pdf
+  * impression au format A3 recto-verson (TODO : bord court ou bord long ?)
 
-Créer les scripts, leur donner des droits d'exécution
+### Mise en oeuvre
+
+Donner des droits d'exécution aux scripts
 ```bash
   chmod +x ./creation_exemplaire.php
   chmod +x ./commandes_conversion.sh  
