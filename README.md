@@ -1,5 +1,7 @@
 # Graphzine
 
+Réalisation et montage d'un zine de 20 pages de graphisme génératif.
+
 ## Procédé d'édition
 
 Un script programmé orchestre le processus depuis la création des images jusqu’à la réalisation des fichiers pdf prêts à imprimer, selon plusieurs étapes :
@@ -62,10 +64,12 @@ Quand les sketchs des différentes pages sont prêts, on peut préparer un exemp
 └── creation_exemplaire.php
 ```
 
+Le dossier zine_test contient une structure complète, et le script creation_exemplaire.php
+
 ### Étapes
 
   * création des images par le script "creation_exemplaire.php"
-  * création des couvertures (par le moyen désiré)
+  * création des couvertures (par le moyen désiré), à placer dans *couv* en respectant la nomenclature
   * assemblage des images par script, jusqu'au fichier pdf
   * impression au format A3 recto-verso **bord court** (très important!)
   * plier, d'abord sur la longueur
@@ -75,7 +79,6 @@ Ranger les dossiers de sketch dans le dossier pages en respectant la structure (
 Donner des droits d'exécution aux scripts
 ```bash
   chmod +x ./creation_exemplaire.php
-  chmod +x ./commandes_conversion.sh  
 ```
 Lancer le script php
 ```bash
