@@ -89,12 +89,13 @@ Lancer le script php
 ```
 Options du script **creation_exemplaire.php**
 ```
-exemple : php ./creation_exemplaire_001.php --random=0 --exemplaires=12 --format=A4 --chemin="/chemin/vers/dossier"
+exemple : php ./creation_exemplaire.php --random=0 --exemplaires=12 --format=A4 --chemin="/pages"
 --exemplaires=n        : nombre d'exemplaires à fabriquer
 --random=0             : ordre des pages au hasard (1, par défaut) ou dans l'ordre alpha (0)
 --format=format        : format du papier (A4, A3 par défaut)
 --chemin="chemin"      : chemin vers le dossier des sketchs
 ```
+
 ## Améliorations possibles
 
 * Choisir le nombre de pages ...
