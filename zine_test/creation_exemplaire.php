@@ -10,43 +10,27 @@ $pages_max = 20;
    Montage d'un exemplaire du fanzine génératif
    Chaque page est créée en appelant les sketch processing, un par un
    Puis elles sont assemblées dans un second temps par un script bash
-    en utilisant convert (imagemagick) sous forme de pages A3 comprenant 4 images
+    en utilisant convert (imagemagick) sous forme de pages comprenant 4 images (format A4 ou A3)
     orientées dans le bon sens!
   Ces pages sont ensuite assemblées dans un unique fichier pdf
-  Le pdf peut-être imprimé et plié, le premier pli se fait dans le sens de la longueur
+  Le pdf est à imprimer, plier, agrafer et massicoter
 
-  avril 2020 / pierre@lesporteslogiques.net
-  https://github.com/emoc/genzine
+  juin 2021 / pierre@lesporteslogiques.net
+  PHP 7.0.33 / Debian 9.5 @ kirin
+  https://github.com/emoc/graphzine
 
   Chaque exemplaire est caractérisé par un timestamp unique AAAA-MM-JJ_HH:MM:SS
 
   DEMARRER
 
-  php ./creation_exemplaire_003.php --exemplaires=2 --groupe=I2A --format=A4 --chemin="/home/emoc/Bureau/2019-2020_INTERACTIVITE/EXERCICES/graphzine_rendus"
-
-  TODOLIST
-
-  OK pouvoir exporter en format A3 ou A4 pour les tests
+  php ./creation_exemplaire --exemplaires=2 --format=A4 --chemin="./pages"
 
   COMMENT IMPRIMER ?
 
   en paysage, recto-verso sur le bord court (très important pour que les pages soient dans l'ordre et dans le bon sens...)
-
-  QUESTIONS
-
-  processing 3.4 ou 3.5.3 ça change kekchoz ?
-  chemins complets peut être nécessaires vu qu'on appelle processing depuis un script
-
-  TODO
-
-  améliorer le traitement des arguments
-
-  VERSIONS
-
-  001 : test avec des pages factices
-  002 : avec les couvertures
-  003 : avec les vrais sketch processing
-
+  plier toutes les feuilles ensemble, en commençant par le pli dans la longueur, plier en pli en crête (pli montagne)
+  agrafer
+  massicoter le haut des pages
 */
 
 
@@ -85,7 +69,7 @@ function arguments($argv) {
 function afficher_aide() {
     echo "exemple : php ./creation_exemplaire_001.php --random=0 --exemplaires=12 --pages=20 --format=A4 --chemin=\"/chemin/vers/dossier\"" . PHP_EOL;
     echo "--exemplaires=n        : nombre d'exemplaires à fabriquer" . PHP_EOL;
-    echo "--pages=n              : nombre de pages sans les 4 couvertures (20 par défaut)" . PHP_EOL;
+    echo "--pages=n              : nombre de pages sans les 4 couvertures (20 par défaut)" . PHP_EOL; // TODO
     echo "--random=0             : ordre des pages au hasard (1, par défaut) ou dans l'ordre alpha (0)" . PHP_EOL;
     echo "--format=format        : format du papier (A4, A3 par défaut)" . PHP_EOL;
     echo "--chemin=\"chemin\"      : chemin vers le dossier des sketchs" . PHP_EOL;
@@ -140,7 +124,7 @@ foreach ($arguments as $action => $valeur) {
 
 $timestamp = date("Ymd_His");
 $chemin = getcwd();
-$densite = 212;                           // densité en DPI pour la version print
+$densite = 150;                           // densité en DPI pour la version print
 $titre = "genzine";
 if ($format == "")
     $format = "A3";
@@ -167,10 +151,10 @@ foreach ($pages_contenu as $p) {
     }
 }
 
-if ($ordre_random)
+if ($ordre_random)          // Pages en ordre aléatoire
     shuffle($pages_images);
-else
-    sort($pages_images);
+else                        // ou par ordre alphabétique
+    sort($pages_images);  
 
 if (count($pages_images) != $pages_max) {
     echo "ATTENTION script arrêté car le nombre de pages à créer (" . count($pages_images) . ") est différent du nombre attendu ($pages_max)\n";
@@ -193,7 +177,7 @@ for ($ex = 0; $ex < $exemplaires; $ex++) {
         else
             $page_str = $page;
         $page_fichier = "p_" . $page_str . ".png";
-        //echo " page " . $page . "( " . $page_fichier . " ) démarrer le script : " . $chemin . PHP_EOL;
+
         $chemin = $chemin_dossier_sketch . "/" . $sketch;
 
         $cmd = "xvfb-run -s \"-ac -screen 0 1600x900x24\"  /home/emoc/processing-3.4/processing-java --sketch=\""

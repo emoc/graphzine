@@ -72,9 +72,12 @@ Le dossier zine_test contient une structure complète, et le script creation_exe
   * création des couvertures (par le moyen désiré), à placer dans *couv* en respectant la nomenclature
   * assemblage des images par script, jusqu'au fichier pdf
   * impression au format A3 recto-verso **bord court** (très important!)
-  * plier, d'abord sur la longueur
+  * plier, d'abord sur la longueur, en pli en crête (pli montagne)
+  * agrafer
+  * massicoter le haut des pages (ou cutter)
 
 ### Mise en oeuvre
+
 Ranger les dossiers de sketch dans le dossier pages en respectant la structure (le nom du dossier n'est pas important)  
 Donner des droits d'exécution aux scripts
 ```bash
@@ -92,9 +95,15 @@ exemple : php ./creation_exemplaire_001.php --random=0 --exemplaires=12 --format
 --format=format        : format du papier (A4, A3 par défaut)
 --chemin="chemin"      : chemin vers le dossier des sketchs
 ```
+## Améliorations possibles
+
+* Choisir le nombre de pages ...
+* Permettre d'activer x fois le même script pour tout le zine (dossier "page_unique"), les variations sont alors prises en compte dans le code génératif
+* prise en charge du format A5 / définition variable ?
 
 ## Ressources
 
 [Traitement par lot avec processing en ligne de commande](http://lesporteslogiques.net/wiki/ressource/code/processing/traitement_par_lot)  
 [Graphzine (wikipedia)](https://fr.wikipedia.org/wiki/Graphzine)  
-[Written Images](http://writtenimages.net/)    
+[Written Images](http://writtenimages.net/)  
+[Vocabulaire du pliage](https://www.chine-culture.com/origami/pli-de-base.php)  
