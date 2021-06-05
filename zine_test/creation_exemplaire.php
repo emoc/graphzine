@@ -1,10 +1,15 @@
 #!/usr/bin/php -q
 <?php
 
-$OK = true; // Permet de tester le script "à blanc"
-$dossier_exemplaires = "./exemplaires/";
-$ordre_random = true;
-$pages_max = 20;
+$OK = true;                               // Permet de tester le script "à blanc"
+
+$dossier_exemplaires = "./exemplaires/";  // dossier dans lequel sont placés les pdf créés
+$ordre_random = true;                     // par défaut : ordre aléatoire des pages
+$pages_max = 20;                          // nombre de pages = CONSTANTE
+$nom_zine = "graphzine";                  // racine du nom des fichiers pdf / TODO : NOT SAFE!
+$format = "A3";                           // format 13 à l'italienne par défaut
+$exemplaires = 1;                         // combien d'exemplaires réaliser ?
+$chemin_dossier_sketch = "./pages";       // dossier contenant les sketchs des pages
 
 /*
    Montage d'un exemplaire du fanzine génératif
@@ -67,21 +72,23 @@ function arguments($argv) {
 }
 
 function afficher_aide() {
-    echo "exemple : php ./creation_exemplaire_001.php --random=0 --exemplaires=12 --pages=20 --format=A4 --chemin=\"/chemin/vers/dossier\"" . PHP_EOL;
+    echo "exemple : php ./creation_exemplaire_001.php --exemplaires=12 --random=0 --pages=20 --format=A4 --nom=\"zinetest\"--chemin=\"/chemin/vers/dossier\"" . PHP_EOL;
     echo "--exemplaires=n        : nombre d'exemplaires à fabriquer" . PHP_EOL;
     echo "--pages=n              : nombre de pages sans les 4 couvertures (20 par défaut)" . PHP_EOL; // TODO
     echo "--random=0             : ordre des pages au hasard (1, par défaut) ou dans l'ordre alpha (0)" . PHP_EOL;
     echo "--format=format        : format du papier (A4, A3 par défaut)" . PHP_EOL;
+    echo "--nom=\"nom\"            : racine du nom des fichiers (graphzine par défaut)" . PHP_EOL;
     echo "--chemin=\"chemin\"      : chemin vers le dossier des sketchs" . PHP_EOL;
 }
 
 function afficher_parametres() {
-    global $groupe, $exemplaires, $timestamp, $format, $ordre_random, $pages_max, $chemin, $titre_complet_print, $titre_complet_web;
+    global $groupe, $exemplaires, $timestamp, $format, $nom_zine, $ordre_random, $pages_max, $chemin, $titre_complet_print, $titre_complet_web;
 
     echo "exemplaires           : " . $exemplaires . PHP_EOL;
     echo "pages                 : " . $pages_max . PHP_EOL;
     echo "format                : " . $format . PHP_EOL;
     echo "random                : " . $ordre_random . PHP_EOL;
+    echo "nom du zine           : " . $nom_zine . PHP_EOL;
     echo "timestamp             : " . $timestamp . PHP_EOL;
     echo "chemin du script      : " . $chemin . PHP_EOL;
     echo "titre complet (print) : " . $titre_complet_print . PHP_EOL;
@@ -91,9 +98,6 @@ function afficher_parametres() {
 // ***** Etape 0 - Traitement des arguments, initialisation des paramètres *****
 
 $arguments = arguments($argv);
-$format = "";
-$exemplaires = 1;                         // combien d'exemplaires réaliser ?
-$chemin_dossier_sketch = "./pages";
 
 foreach ($arguments as $action => $valeur) {
     if ($action == "aide") {
@@ -116,6 +120,9 @@ foreach ($arguments as $action => $valeur) {
     if ($action == "dossier") {
         $chemin_dossier_sketch = $valeur;
     }
+    if ($action == "nom") {
+        $nom_zine = $valeur;
+    }
     if ($action == "random") {
         if ($valeur == 0)
             $ordre_random = false;
@@ -125,7 +132,7 @@ foreach ($arguments as $action => $valeur) {
 $timestamp = date("Ymd_His");
 $chemin = getcwd();
 $densite = 150;                           // densité en DPI pour la version print
-$titre = "genzine";
+$titre = $nom_zine;
 if ($format == "")
     $format = "A3";
 if ($format == "A4")
@@ -154,7 +161,7 @@ foreach ($pages_contenu as $p) {
 if ($ordre_random)          // Pages en ordre aléatoire
     shuffle($pages_images);
 else                        // ou par ordre alphabétique
-    sort($pages_images);  
+    sort($pages_images);
 
 if (count($pages_images) != $pages_max) {
     echo "ATTENTION script arrêté car le nombre de pages à créer (" . count($pages_images) . ") est différent du nombre attendu ($pages_max)\n";

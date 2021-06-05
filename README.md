@@ -93,6 +93,7 @@ exemple : php ./creation_exemplaire.php --random=0 --exemplaires=12 --format=A4 
 --exemplaires=n        : nombre d'exemplaires à fabriquer
 --random=0             : ordre des pages au hasard (1, par défaut) ou dans l'ordre alpha (0)
 --format=format        : format du papier (A4, A3 par défaut)
+--nom="nom"            : racine du nom des fichiers (graphzine par défaut)
 --chemin="chemin"      : chemin vers le dossier des sketchs
 ```
 
@@ -101,6 +102,7 @@ exemple : php ./creation_exemplaire.php --random=0 --exemplaires=12 --format=A4 
 * Choisir le nombre de pages ...
 * Permettre d'activer x fois le même script pour tout le zine (dossier "page_unique"), les variations sont alors prises en compte dans le code génératif
 * prise en charge du format A5 / définition variable ?
+* argument pour créer un zine d'après un seul script (page unique)
 
 ## Ressources
 
