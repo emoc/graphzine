@@ -145,6 +145,11 @@ $usleep = 1000000;
 
 afficher_parametres();
 
+// ***** Etape 0 - Créer les couvertures, le cas échéant
+
+if (file_exists("./couvertures.php"))
+    include './couvertures.php';
+
 // ***** Etape 1 - Verification que les scripts sont bien au complet ***********
 
 
