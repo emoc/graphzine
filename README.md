@@ -35,12 +35,16 @@ Quand les sketchs des différentes pages sont prêts, on peut préparer un exemp
 ### Structure du dossier
 
 ```
-.
+zine_test
+│
 ├── couv
 │   ├── c_ro.png
 │   ├── c_vo.png
 │   ├── i_ro.png
 │   └── i_vo.png
+│
+├── couv_assets
+│   └── ...
 │
 ├── pages
 │   ├── zine_page_1
@@ -97,12 +101,13 @@ exemple : php ./creation_exemplaire.php --random=0 --exemplaires=12 --format=A4 
 --chemin="chemin"      : chemin vers le dossier des sketchs
 ```
 
+Si le fichier **couvertures.php** existe, il sera appelé à création de chaque exemplaire et produit les fichiers d'une couverture unique.
+
 ## Améliorations possibles
 
 * Choisir le nombre de pages ...
-* Permettre d'activer x fois le même script pour tout le zine (dossier "page_unique"), les variations sont alors prises en compte dans le code génératif
+* Permettre d'activer x fois le même script pour tout le zine (dossier "page_unique"), les variations sont alors prises en compte dans le code génératif (en argument)
 * prise en charge du format A5 / définition variable ?
-* argument pour créer un zine d'après un seul script (page unique)
 
 ## Ressources
 
